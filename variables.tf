@@ -1,3 +1,8 @@
+variable "location" {
+  description = "Location for the resource group"
+  type        = string
+  default     = "canadacentral"
+}
 
 # All resources will have these tags
 variable "common_tags" {
