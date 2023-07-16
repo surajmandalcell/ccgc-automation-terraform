@@ -7,3 +7,10 @@ TODO:
 - [x] rgroup-n01537188
 - [ ] vmlinux-n01537188
 - [ ] vmwindows-n01537188
+
+# Common Commands
+
+Get number of resources to be created
+```
+terraform plan -detailed-exitcode
+```

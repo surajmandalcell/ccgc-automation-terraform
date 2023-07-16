@@ -26,3 +26,8 @@ output "storage_account_name" {
 }
 
 # vmlinux-n01537188
+
+# database-n01537188
+output "database_instance_name" {
+  value = module.database.database_instance_name
+}

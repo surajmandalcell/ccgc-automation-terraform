@@ -21,3 +21,12 @@ module "common-n01537188" {
   common_tags         = var.common_tags
 }
 
+module "database" {
+  source              = "./modules/database-n01537188"
+  humber_id           = var.personal.n_number
+  location            = var.location
+  resource_group_name = module.rgroup-n01537188.resource_group_name
+  sku_name            = "GP_Gen5_2"
+  postgresql_version  = "10"
+  common_tags         = var.common_tags
+}

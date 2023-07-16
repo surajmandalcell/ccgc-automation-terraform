@@ -5,6 +5,14 @@ variable "location" {
 }
 
 # All resources will have these tags
+variable "personal" {
+  type = map(string)
+  default = {
+    n_number = "n01537188",
+    name     = "Suraj Mandal",
+  }
+}
+
 variable "common_tags" {
   type = map(string)
   default = {
