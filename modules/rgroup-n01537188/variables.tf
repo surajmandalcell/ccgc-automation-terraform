@@ -13,5 +13,5 @@ variable "location" {
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "n01537188-RG"
+  default     = "n01537188-rg"
 }

@@ -1,5 +1,5 @@
 resource "azurerm_log_analytics_workspace" "n01537188-law" {
-  name                = "n01537188-LAW"
+  name                = "n01537188-law"
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = "PerGB2018"
@@ -8,7 +8,7 @@ resource "azurerm_log_analytics_workspace" "n01537188-law" {
 }
 
 resource "azurerm_recovery_services_vault" "n01537188-rsv" {
-  name                = "n01537188-RSV"
+  name                = "n01537188-rsv"
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = "Standard"
@@ -17,7 +17,7 @@ resource "azurerm_recovery_services_vault" "n01537188-rsv" {
 }
 
 resource "azurerm_storage_account" "n01537188-sa" {
-  name                     = "n01537188-SA${random_integer.random_suffix.result}"
+  name                     = "n01537188sa${random_integer.random_suffix.result}"
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "Standard"

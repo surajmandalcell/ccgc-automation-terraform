@@ -1,13 +1,13 @@
 module "rgroup-n01537188" {
   source              = "./modules/rgroup-n01537188"
-  resource_group_name = "n01537188-RG"
+  resource_group_name = "n01537188-rg"
   location            = var.location
   common_tags         = var.common_tags
 }
 
 module "network-n01537188" {
   source               = "./modules/network-n01537188"
-  virtual_network_name = "n01537188-VNET"
+  virtual_network_name = "n01537188-vnet"
   subnet_name          = "n01537188-subnet"
   resource_group_name  = module.rgroup-n01537188.resource_group_name
   location             = var.location
@@ -49,6 +49,7 @@ module "vmlinux-n01537188" {
       admin_username = "n01537188-surajmandal"
       public_key     = "/Users/surajmandal/Desktop/dev.nosync/cloud/keys/aws_devops/devops1.pub"
     }
+
     private_key = "/Users/surajmandal/Desktop/dev.nosync/cloud/keys/aws_devops/devops1"
 
     os_disk = {
@@ -67,7 +68,7 @@ module "vmlinux-n01537188" {
 
   vmlinux-avs-info = {
     name                         = "linux-avs"
-    platform_update_domain_count = "4"
+    platform_update_domain_count = "3"
     platform_fault_domain_count  = "2"
   }
 
@@ -123,7 +124,7 @@ module "vmlinux-n01537188" {
 #     computer_name  = "n01537188"
 #     size           = "Standard_B1s"
 #     admin_username = "n01537188-nisarg"
-#     admin_password = "C:\\Users\\Nisarg Mahyavanshi\\automation\\terraform\\lab02s3\\vm_ssh_key\\id_rsa"
+#     admin_password = "/Users/surajmandal/Desktop/dev.nosync/cloud/keys/aws_devops/devops1"
 
 #     winrm_listener_protocol = "Http"
 
