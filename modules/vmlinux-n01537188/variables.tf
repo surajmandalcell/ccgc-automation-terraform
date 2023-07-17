@@ -15,7 +15,6 @@ variable "location" {
 }
 
 # This
-
 variable "instance_count" {
   type        = number
   description = "Total number of Linux VMs"

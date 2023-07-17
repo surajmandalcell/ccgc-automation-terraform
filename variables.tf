@@ -22,3 +22,5 @@ variable "common_tags" {
     Environment    = "Learning"
   }
 }
+
+

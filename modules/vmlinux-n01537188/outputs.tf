@@ -1,23 +1,23 @@
-output "vmlinux" {
+output "n01537188-vmlinux" {
   value = {
-    ids       = values(azurerm_linux_virtual_machine.vmlinux)[*].id
-    hostnames = values(azurerm_linux_virtual_machine.vmlinux)[*].name
-    nic_ids   = values(azurerm_linux_virtual_machine.vmlinux)[*].network_interface_ids
+    ids       = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].id
+    hostnames = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].name
+    nic-ids   = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].network_interface_ids
   }
 }
 
-output "vmlinux-fqdn" {
+output "n01537188-vmlinux-fqdn" {
   value = values(azurerm_public_ip.pip)[*].fqdn
 }
 
-output "vmlinux-private-ip" {
-  value = values(azurerm_linux_virtual_machine.vmlinux)[*].private_ip_address
+output "n01537188-vmlinux-private-ip" {
+  value = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].private_ip_address
 }
 
-output "vmlinux-public-ip" {
-  value = values(azurerm_linux_virtual_machine.vmlinux)[*].public_ip_address
+output "n01537188-vmlinux-public-ip" {
+  value = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].public_ip_address
 }
 
-output "vmlinux-nic_ids" {
-  value = [values(azurerm_network_interface.nic)[*].id]
+output "n01537188-vmlinux-nic-ids" {
+  value = [values(azurerm_network_interface.n01537188-vmlinux-nic)[*].id]
 }

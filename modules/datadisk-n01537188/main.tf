@@ -1,0 +1,49 @@
+# Linux
+resource "azurerm_managed_disk" "vmlinux-datadisk" {
+  resource_group_name = var.resource_group_name
+  location            = var.location
+
+  # count = var.vmlinux-datadisk-info.total-vms
+  count                = length(var.vmlinux-datadisk-info.n01537188-vmlinux-names)
+  name                 = "${var.vmlinux-datadisk-info.n01537188-vmlinux-names[count.index]}-datadisk-${format("%d", count.index + 1)}"
+  storage_account_type = var.vmlinux-datadisk-info.storage_account_type
+  create_option        = var.vmlinux-datadisk-info.create_option
+  disk_size_gb         = var.vmlinux-datadisk-info.disk_size_gb
+
+  tags = var.tags
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "vmlinux-datadisk-attachment" {
+  count              = length(var.vmlinux-datadisk-info.n01537188-vmlinux-names)
+  managed_disk_id    = azurerm_managed_disk.vmlinux-datadisk[count.index].id
+  virtual_machine_id = var.vmlinux-datadisk-attachment-info.virtual_machine_ids[count.index]
+  lun                = var.vmlinux-datadisk-attachment-info.lun
+  caching            = var.vmlinux-datadisk-attachment-info.caching
+
+  depends_on = [azurerm_managed_disk.vmlinux-datadisk]
+}
+
+# Windows
+resource "azurerm_managed_disk" "vmwindows-datadisk" {
+  resource_group_name = var.resource_group_name
+  location            = var.location
+
+  count = length(var.vmwindows-datadisk-info.n01537188-vmwindows-names)
+  name = "${
+    var.vmwindows-datadisk-info.n01537188-vmwindows-names[count.index]
+  }-datadisk-${format("%d", count.index + 1)}"
+  storage_account_type = var.vmwindows-datadisk-info.storage_account_type
+  create_option        = var.vmwindows-datadisk-info.create_option
+  disk_size_gb         = var.vmwindows-datadisk-info.disk_size_gb
+  tags                 = var.tags
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "vmwindows-datadisk-attachment" {
+  count              = length(var.vmwindows-datadisk-info.n01537188-vmwindows-names)
+  managed_disk_id    = azurerm_managed_disk.vmwindows-datadisk[count.index].id
+  virtual_machine_id = var.vmwindows-datadisk-attachment-info.virtual_machine_ids[count.index]
+  lun                = var.vmwindows-datadisk-attachment-info.lun
+  caching            = var.vmwindows-datadisk-attachment-info.caching
+
+  depends_on = [azurerm_managed_disk.vmwindows-datadisk]
+}

@@ -48,8 +48,8 @@ TODO:
 - [ ] loadbalancer-n01537188
 - [x] network-n01537188
 - [x] rgroup-n01537188
-- [ ] vmlinux-n01537188
-- [ ] vmwindows-n01537188
+- [x] vmlinux-n01537188
+- [x] vmwindows-n01537188
 
 # Common Commands
 
