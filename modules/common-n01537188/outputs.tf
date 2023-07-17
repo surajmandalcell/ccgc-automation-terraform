@@ -9,3 +9,7 @@ output "recovery_services_vault_name" {
 output "storage_account_name" {
   value = azurerm_storage_account.n01537188-sa.name
 }
+
+output "storage_account-primary_blob_endpoint" {
+  value = azurerm_storage_account.n01537188-sa.primary_blob_endpoint
+}
