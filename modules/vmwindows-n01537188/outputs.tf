@@ -5,7 +5,7 @@ output "vmwindows" {
   }
 }
 
-output "vmwindows-FQDN" {
+output "vmwindows-fqdn" {
   value = azurerm_public_ip.vmwindows-pip[*].fqdn
 }
 

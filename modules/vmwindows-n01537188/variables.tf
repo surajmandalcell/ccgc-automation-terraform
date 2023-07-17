@@ -1,8 +1,20 @@
-variable "rg-info" {
+# Common
+variable "common_tags" {
   type        = map(string)
-  description = "Contains information about the resource group for Windows machine"
+  description = "This block is to define common tags"
 }
 
+variable "location" {
+  description = "The Azure Region in which all resources in this example should be created."
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "Name of the resource group"
+  type        = string
+}
+
+# This
 variable "instance_count" {
   type        = number
   description = "Total number of Windows VMs"

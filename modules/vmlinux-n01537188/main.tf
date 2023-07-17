@@ -12,6 +12,8 @@ resource "azurerm_availability_set" "vmlinux-avs" {
 
   platform_fault_domain_count  = var.vmlinux-avs-info.platform_fault_domain_count
   platform_update_domain_count = var.vmlinux-avs-info.platform_update_domain_count
+
+  tags = var.common_tags
 }
 
 resource "azurerm_public_ip" "pip" {
@@ -27,6 +29,8 @@ resource "azurerm_public_ip" "pip" {
   domain_name_label = "${var.vmlinux-info.name}${each.key}"
 
   idle_timeout_in_minutes = var.vmlinux-pip.idle_timeout_in_minutes
+
+  tags = var.common_tags
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -43,6 +47,8 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = var.vmlinux-nic.ip_configuration.private_ip_address_allocation
     public_ip_address_id          = azurerm_public_ip.pip[each.key].id
   }
+
+  tags = var.common_tags
 }
 
 resource "azurerm_linux_virtual_machine" "vmlinux" {
@@ -86,6 +92,8 @@ resource "azurerm_linux_virtual_machine" "vmlinux" {
   }
 
   depends_on = [azurerm_availability_set.vmlinux-avs]
+
+  tags = var.common_tags
 }
 
 resource "azurerm_virtual_machine_extension" "vmlinux-network-watcher" {
@@ -100,6 +108,8 @@ resource "azurerm_virtual_machine_extension" "vmlinux-network-watcher" {
   auto_upgrade_minor_version = var.vmlinux-network-watcher.auto_upgrade_minor_version
 
   settings = var.vmlinux-network-watcher.settings
+
+  tags = var.common_tags
 }
 
 resource "azurerm_virtual_machine_extension" "vmlinux-network-monitor" {
@@ -114,4 +124,6 @@ resource "azurerm_virtual_machine_extension" "vmlinux-network-monitor" {
   auto_upgrade_minor_version = var.vmlinux-network-monitor.auto_upgrade_minor_version
 
   settings = var.vmlinux-network-monitor.settings
+
+  tags = var.common_tags
 }

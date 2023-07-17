@@ -1,6 +1,6 @@
 resource "azurerm_availability_set" "vmwindows-avs" {
-  resource_group_name = var.rg-info.name
-  location            = var.rg-info.location
+  resource_group_name = var.resource_group_name
+  location            = var.location
 
   count = var.instance_count
 
@@ -11,8 +11,8 @@ resource "azurerm_availability_set" "vmwindows-avs" {
 }
 
 resource "azurerm_public_ip" "vmwindows-pip" {
-  resource_group_name = var.rg-info.name
-  location            = var.rg-info.location
+  resource_group_name = var.resource_group_name
+  location            = var.location
 
   count = var.instance_count
 
@@ -24,8 +24,8 @@ resource "azurerm_public_ip" "vmwindows-pip" {
 }
 
 resource "azurerm_network_interface" "vmwindows-nic" {
-  resource_group_name = var.rg-info.name
-  location            = var.rg-info.location
+  resource_group_name = var.resource_group_name
+  location            = var.location
 
   count = var.instance_count
 
@@ -40,8 +40,8 @@ resource "azurerm_network_interface" "vmwindows-nic" {
 }
 
 resource "azurerm_windows_virtual_machine" "vmwindows" {
-  resource_group_name = var.rg-info.name
-  location            = var.rg-info.location
+  resource_group_name = var.resource_group_name
+  location            = var.location
 
   count = var.instance_count
 
@@ -91,19 +91,19 @@ resource "azurerm_virtual_machine_extension" "vmwindows-antimalware" {
 
   settings = <<SETTINGS
         {
-            "AntimalwareEnabled": true,
-            "RealtimeProtectionEnabled": "true",
-            "ScheduledScanSettings": {
-                "isEnabled": "true",
-                "day": "1",
-                "time": "120",
-                "scanType": "Quick"
-                },
-            "Exclusions": {
-                "Extensions": "",
-                "Paths": "",
-                "Processes": ""
-                }
+          "AntimalwareEnabled": true,
+          "RealtimeProtectionEnabled": "true",
+          "ScheduledScanSettings": {
+              "isEnabled": "true",
+              "day": "1",
+              "time": "120",
+              "scanType": "Quick"
+          },
+          "Exclusions": {
+              "Extensions": "",
+              "Paths": "",
+              "Processes": ""
+          }
         }
     SETTINGS
 }

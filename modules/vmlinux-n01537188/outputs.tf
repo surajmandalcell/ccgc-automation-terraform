@@ -6,7 +6,7 @@ output "vmlinux" {
   }
 }
 
-output "vmlinux-FQDN" {
+output "vmlinux-fqdn" {
   value = values(azurerm_public_ip.pip)[*].fqdn
 }
 
