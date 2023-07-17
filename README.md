@@ -44,8 +44,8 @@ The `assignment1-RandomID` root module defines all child modules and prints the 
 TODO:
 - [x] common-n01537188
 - [x] database-n01537188
-- [ ] datadisk-n01537188
-- [ ] loadbalancer-n01537188
+- [x] datadisk-n01537188
+- [x] loadbalancer-n01537188
 - [x] network-n01537188
 - [x] rgroup-n01537188
 - [x] vmlinux-n01537188

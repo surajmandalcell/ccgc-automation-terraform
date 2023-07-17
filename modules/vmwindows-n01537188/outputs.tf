@@ -1,18 +1,22 @@
-output "vmwindows" {
+output "n01537188-vmwindows" {
   value = {
-    ids       = azurerm_windows_virtual_machine.vmwindows[*].id
-    hostnames = azurerm_windows_virtual_machine.vmwindows[*].name
+    ids       = azurerm_windows_virtual_machine.n01537188-vmwindows[*].id
+    hostnames = azurerm_windows_virtual_machine.n01537188-vmwindows[*].name
   }
 }
 
-output "vmwindows-fqdn" {
-  value = azurerm_public_ip.vmwindows-pip[*].fqdn
+output "n01537188-vmwindows-fqdn" {
+  value = azurerm_public_ip.n01537188-vmwindows-pip[*].fqdn
 }
 
-output "vmwindows-private-ip" {
-  value = azurerm_windows_virtual_machine.vmwindows[*].private_ip_address
+output "n01537188-vmwindows-nic" {
+  value = azurerm_network_interface.n01537188-vmwindows-nic[*].id
 }
 
-output "vmwindows-public-ip" {
-  value = azurerm_windows_virtual_machine.vmwindows[*].public_ip_address
+output "n01537188-vmwindows-private-ip" {
+  value = azurerm_windows_virtual_machine.n01537188-vmwindows[*].private_ip_address
+}
+
+output "n01537188-vmwindows-public-ip" {
+  value = azurerm_windows_virtual_machine.n01537188-vmwindows[*].public_ip_address
 }

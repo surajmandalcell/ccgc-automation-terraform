@@ -52,21 +52,21 @@ output "vmlinux-nic-ids" {
 }
 
 # vmwindows-n01537188
-# output "vmwindows-hostname" {
-#   value = module.vmwindows-n01537188.n01537188-vmwindows
-# }
+output "vmwindows-hostname" {
+  value = module.vmwindows-n01537188.n01537188-vmwindows
+}
 
-# output "vmwindows-fqdn" {
-#   value = module.vmwindows-n01537188.n01537188-vmwindows-fqdn
-# }
+output "vmwindows-fqdn" {
+  value = module.vmwindows-n01537188.n01537188-vmwindows-fqdn
+}
 
-# output "vmwindows-private-ip" {
-#   value = module.vmwindows-n01537188.n01537188-vmwindows-private-ip
-# }
+output "vmwindows-private-ip" {
+  value = module.vmwindows-n01537188.n01537188-vmwindows-private-ip
+}
 
-# output "vmwindows-public-ip" {
-#   value = module.vmwindows-n01537188.n01537188-vmwindows-public-ip
-# }
+output "vmwindows-public-ip" {
+  value = module.vmwindows-n01537188.n01537188-vmwindows-public-ip
+}
 
 # # loadbalancer
 # output "loadbalancer" {

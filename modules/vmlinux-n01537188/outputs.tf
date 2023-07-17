@@ -7,7 +7,7 @@ output "n01537188-vmlinux" {
 }
 
 output "n01537188-vmlinux-fqdn" {
-  value = values(azurerm_public_ip.pip)[*].fqdn
+  value = values(azurerm_public_ip.n01537188-vmlinux-pip)[*].fqdn
 }
 
 output "n01537188-vmlinux-private-ip" {

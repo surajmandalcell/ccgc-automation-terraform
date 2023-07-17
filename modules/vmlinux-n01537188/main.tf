@@ -19,7 +19,6 @@ resource "azurerm_linux_virtual_machine" "n01537188-vmlinux" {
     public_key = file(var.vmlinux-info.admin_ssh_key.public_key)
   }
 
-
   availability_set_id = azurerm_availability_set.n01537188-vmlinux-avs[each.key].id
 
   network_interface_ids = [azurerm_network_interface.n01537188-vmlinux-nic[each.key].id]
@@ -61,7 +60,7 @@ resource "azurerm_availability_set" "n01537188-vmlinux-avs" {
   tags = var.common_tags
 }
 
-resource "azurerm_public_ip" "pip" {
+resource "azurerm_public_ip" "n01537188-vmlinux-pip" {
   resource_group_name = var.resource_group_name
   location            = var.location
 
@@ -88,9 +87,9 @@ resource "azurerm_network_interface" "n01537188-vmlinux-nic" {
 
   ip_configuration {
     name                          = "${var.vmlinux-info.name}-ipconfig-${each.key}"
-    subnet_id                     = var.vmlinux-nic.ip_configuration.subnet_id
-    private_ip_address_allocation = var.vmlinux-nic.ip_configuration.private_ip_address_allocation
-    public_ip_address_id          = azurerm_public_ip.pip[each.key].id
+    subnet_id                     = var.vmlinux-nic.ip-configuration.subnet_id
+    private_ip_address_allocation = var.vmlinux-nic.ip-configuration.private_ip_address_allocation
+    public_ip_address_id          = azurerm_public_ip.n01537188-vmlinux-pip[each.key].id
   }
 
   tags = var.common_tags

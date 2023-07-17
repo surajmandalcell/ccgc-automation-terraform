@@ -1,45 +1,4 @@
-resource "azurerm_availability_set" "vmwindows-avs" {
-  resource_group_name = var.resource_group_name
-  location            = var.location
-
-  count = var.instance_count
-
-  name = "${var.vmwindows-info.name}-avs-${format("%d", count.index + 1)}"
-
-  platform_update_domain_count = var.vmwindows-avs-info.platform_update_domain_count
-  platform_fault_domain_count  = var.vmwindows-avs-info.platform_fault_domain_count
-}
-
-resource "azurerm_public_ip" "vmwindows-pip" {
-  resource_group_name = var.resource_group_name
-  location            = var.location
-
-  count = var.instance_count
-
-  name              = "${var.vmwindows-info.name}-pip-${format("%d", count.index + 1)}"
-  allocation_method = var.vmwindows-pip.allocation_method
-  domain_name_label = "${var.vmwindows-info.name}${format("%d", count.index + 1)}"
-
-  idle_timeout_in_minutes = var.vmwindows-pip.idle_timeout_in_minutes
-}
-
-resource "azurerm_network_interface" "vmwindows-nic" {
-  resource_group_name = var.resource_group_name
-  location            = var.location
-
-  count = var.instance_count
-
-  name = "${var.vmwindows-info.name}-nic-${format("%d", count.index + 1)}"
-
-  ip_configuration {
-    name                          = "${var.vmwindows-info.name}-ipconfig-${format("%d", count.index + 1)}"
-    subnet_id                     = var.vmwindows-nic.ip_configuration.subnet_id
-    private_ip_address_allocation = var.vmwindows-nic.ip_configuration.private_ip_address_allocation
-    public_ip_address_id          = azurerm_public_ip.vmwindows-pip[count.index].id
-  }
-}
-
-resource "azurerm_windows_virtual_machine" "vmwindows" {
+resource "azurerm_windows_virtual_machine" "n01537188-vmwindows" {
   resource_group_name = var.resource_group_name
   location            = var.location
 
@@ -73,12 +32,53 @@ resource "azurerm_windows_virtual_machine" "vmwindows" {
     storage_account_uri = var.vmwindows-info.storage_account_uri
   }
 
-  network_interface_ids = [azurerm_network_interface.vmwindows-nic[count.index].id]
+  network_interface_ids = [azurerm_network_interface.n01537188-vmwindows-nic[count.index].id]
 
-  depends_on = [azurerm_availability_set.vmwindows-avs]
+  depends_on = [azurerm_availability_set.n01537188-vmwindows-avs]
 }
 
-resource "azurerm_virtual_machine_extension" "vmwindows-antimalware" {
+resource "azurerm_availability_set" "n01537188-vmwindows-avs" {
+  resource_group_name = var.resource_group_name
+  location            = var.location
+
+  count = var.instance_count
+
+  name = "${var.vmwindows-info.name}-avs-${format("%d", count.index + 1)}"
+
+  platform_update_domain_count = var.vmwindows-avs-info.platform_update_domain_count
+  platform_fault_domain_count  = var.vmwindows-avs-info.platform_fault_domain_count
+}
+
+resource "azurerm_public_ip" "n01537188-vmwindows-pip" {
+  resource_group_name = var.resource_group_name
+  location            = var.location
+
+  count = var.instance_count
+
+  name              = "${var.vmwindows-info.name}-pip-${format("%d", count.index + 1)}"
+  allocation_method = var.vmwindows-pip.allocation_method
+  domain_name_label = "${var.vmwindows-info.name}${format("%d", count.index + 1)}"
+
+  idle_timeout_in_minutes = var.vmwindows-pip.idle_timeout_in_minutes
+}
+
+resource "azurerm_network_interface" "n01537188-vmwindows-nic" {
+  resource_group_name = var.resource_group_name
+  location            = var.location
+
+  count = var.instance_count
+
+  name = "${var.vmwindows-info.name}-nic-${format("%d", count.index + 1)}"
+
+  ip_configuration {
+    name                          = "${var.vmwindows-info.name}-ipconfig-${format("%d", count.index + 1)}"
+    subnet_id                     = var.vmwindows-nic.ip-configuration.subnet_id
+    private_ip_address_allocation = var.vmwindows-nic.ip-configuration.private_ip_address_allocation
+    public_ip_address_id          = azurerm_public_ip.n01537188-vmwindows-pip[count.index].id
+  }
+}
+
+resource "azurerm_virtual_machine_extension" "n01537188-vmwindows-antimalware" {
 
   count = var.instance_count
 
@@ -87,7 +87,7 @@ resource "azurerm_virtual_machine_extension" "vmwindows-antimalware" {
   type                       = var.vmwindows-antimalware.type
   type_handler_version       = var.vmwindows-antimalware.type_handler_version
   auto_upgrade_minor_version = var.vmwindows-antimalware.auto_upgrade_minor_version
-  virtual_machine_id         = element(azurerm_windows_virtual_machine.vmwindows[*].id, count.index)
+  virtual_machine_id         = element(azurerm_windows_virtual_machine.n01537188-vmwindows[*].id, count.index)
 
   settings = <<SETTINGS
         {
