@@ -24,3 +24,13 @@ variable "common_tags" {
 }
 
 
+# Loadbalancer Independent Variables
+variable "loadbalancer-rules" {
+  type = map(string)
+  default = {
+    name          = "loadbalancer-rules"
+    protocol      = "Tcp"
+    frontend_port = "22"
+    backend_port  = "22"
+  }
+}

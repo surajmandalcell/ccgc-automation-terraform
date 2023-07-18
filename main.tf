@@ -219,19 +219,13 @@ module "loadbalancer-n01537188" {
   loadbalancer-name = "n01537188-loadbalancer"
   allocation_method = "Dynamic"
 
-  loadbalancer-nic-backend_pool_association-info = {
+  loadbalancer-backend_pool_association = {
     count     = 3
     hostnames = module.vmlinux-n01537188.n01537188-vmlinux.hostnames
-    nic-ids   = module.vmlinux-n01537188.n01537188-vmlinux.ids
+    nic-ids   = module.vmlinux-n01537188.n01537188-vmlinux.nic-ids
   }
 
-  loadbalancer-rules = {
-    name                           = "loadbalancer-rules"
-    protocol                       = "Tcp"
-    frontend_port                  = "22"
-    backend_port                   = "22"
-    frontend_ip-configuration_name = "PublicIPAddress"
-  }
+  loadbalancer-rules = var.loadbalancer-rules
 
   common_tags = var.common_tags
 }

@@ -28,11 +28,12 @@ resource "azurerm_lb_backend_address_pool" "n01537188-loadbalancer-address_pool"
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "n01537188-loadbalancer-nic-backend_pool_association" {
-  count                   = var.loadbalancer-nic-backend_pool_association-info.count
-  network_interface_id    = var.loadbalancer-nic-backend_pool_association-info.nic-ids[count.index]
+  count                   = var.loadbalancer-backend_pool_association.count
+  network_interface_id    = var.loadbalancer-backend_pool_association.nic-ids[count.index]
   backend_address_pool_id = azurerm_lb_backend_address_pool.n01537188-loadbalancer-address_pool.id
-  ip_configuration_name   = "${substr(var.loadbalancer-nic-backend_pool_association-info.hostnames[0], 0, length(var.loadbalancer-nic-backend_pool_association-info.hostnames[0]) - 2)}-ipconfig-${format("%d", count.index + 1)}"
+  ip_configuration_name   = "${substr(var.loadbalancer-backend_pool_association.hostnames[0], 0, length(var.loadbalancer-backend_pool_association.hostnames[0]) - 2)}-ipconfig-${format("%d", count.index + 1)}"
 }
+
 
 resource "azurerm_lb_rule" "n01537188-loadbalancer-rules" {
   loadbalancer_id                = azurerm_lb.n01537188-loadbalancer.id

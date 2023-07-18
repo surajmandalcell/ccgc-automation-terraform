@@ -2,7 +2,7 @@ output "n01537188-vmlinux" {
   value = {
     ids       = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].id
     hostnames = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].name
-    nic-ids   = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].network_interface_ids
+    nic-ids   = values(azurerm_linux_virtual_machine.n01537188-vmlinux)[*].network_interface_ids[0]
   }
 }
 

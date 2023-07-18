@@ -19,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "n01537188-vmlinux" {
     public_key = file(var.vmlinux-info.admin_ssh_key.public_key)
   }
 
-  availability_set_id = azurerm_availability_set.n01537188-vmlinux-avs[each.key].id
+  availability_set_id = azurerm_availability_set.n01537188-vmlinux-avs.id
 
   network_interface_ids = [azurerm_network_interface.n01537188-vmlinux-nic[each.key].id]
 
@@ -50,9 +50,7 @@ resource "azurerm_availability_set" "n01537188-vmlinux-avs" {
   resource_group_name = var.resource_group_name
   location            = var.location
 
-  for_each = local.instances
-
-  name = "${var.vmlinux-info.name}-avs-${each.key}"
+  name = "${var.vmlinux-info.name}-avs"
 
   platform_fault_domain_count  = var.vmlinux-avs-info.platform_fault_domain_count
   platform_update_domain_count = var.vmlinux-avs-info.platform_update_domain_count

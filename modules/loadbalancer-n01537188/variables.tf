@@ -25,7 +25,7 @@ variable "allocation_method" {
   description = "Allocation method for the public IP address"
 }
 
-variable "loadbalancer-nic-backend_pool_association-info" {
+variable "loadbalancer-backend_pool_association" {
   type        = any
   description = "Contains information about the NIC and load balancer's backend_pool association"
 }
