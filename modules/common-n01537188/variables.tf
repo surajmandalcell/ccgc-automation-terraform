@@ -14,4 +14,6 @@ variable "resource_group_name" {
   type        = string
 }
 
-# This
+variable "storage_account_name" {
+  type = string
+}

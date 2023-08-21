@@ -51,29 +51,11 @@ output "vmlinux-nic-ids" {
   value = module.vmlinux-n01537188.n01537188-vmlinux-nic-ids
 }
 
-# vmwindows-n01537188
-output "vmwindows-hostname" {
-  value = module.vmwindows-n01537188.n01537188-vmwindows
+# loadbalancer
+output "loadbalancer" {
+  value = module.loadbalancer-n01537188.n01537188-loadbalancer-name
 }
 
-output "vmwindows-fqdn" {
-  value = module.vmwindows-n01537188.n01537188-vmwindows-fqdn
+output "loadbalancer-ip" {
+  value = module.loadbalancer-n01537188.n01537188-loadbalancer-ip
 }
-
-output "vmwindows-private-ip" {
-  value = module.vmwindows-n01537188.n01537188-vmwindows-private-ip
-}
-
-output "vmwindows-public-ip" {
-  value = module.vmwindows-n01537188.n01537188-vmwindows-public-ip
-}
-
-# # loadbalancer
-# output "loadbalancer" {
-#   value = module.loadbalancer-n01537188.n01537188-loadbalancer
-# }
-
-# # Database
-# output "database" {
-#   value = module.database-n01537188.n01537188-database
-# }

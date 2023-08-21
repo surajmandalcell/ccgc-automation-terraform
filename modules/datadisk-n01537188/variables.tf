@@ -24,13 +24,3 @@ variable "vmlinux-datadisk-attachment-info" {
   type        = any
   description = "Contians information about attachment configurations for Linux VMs and their respective datadisks"
 }
-
-variable "vmwindows-datadisk-info" {
-  type        = any
-  description = "Contians information about the datadisk for Windows VMs"
-}
-
-variable "vmwindows-datadisk-attachment-info" {
-  type        = any
-  description = "Contians information about attachment configurations for Windows VMs and their respective datadisks"
-}

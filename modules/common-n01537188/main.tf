@@ -17,7 +17,7 @@ resource "azurerm_recovery_services_vault" "n01537188-rsv" {
 }
 
 resource "azurerm_storage_account" "n01537188-sa" {
-  name                     = "n01537188sa${random_integer.random_suffix.result}"
+  name                     = "${var.storage_account_name}${random_integer.random_suffix.result}"
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "Standard"
@@ -29,4 +29,5 @@ resource "azurerm_storage_account" "n01537188-sa" {
 resource "random_integer" "random_suffix" {
   min = 1000
   max = 9999
+  seed = var.storage_account_name
 }

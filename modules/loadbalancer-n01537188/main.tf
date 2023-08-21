@@ -5,6 +5,8 @@ resource "azurerm_public_ip" "n01537188-loadbalancer-pip" {
   name = "${var.loadbalancer-name}-pip"
 
   allocation_method = var.allocation_method
+  idle_timeout_in_minutes = "30"
+
   tags              = var.common_tags
 }
 

@@ -34,3 +34,8 @@ variable "loadbalancer-rules" {
     backend_port  = "22"
   }
 }
+
+
+variable "common_password" {
+  default = "Password123!"
+}

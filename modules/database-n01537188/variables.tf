@@ -30,3 +30,8 @@ variable "postgresql_version" {
   description = "PostgreSQL version for the server"
   type        = string
 }
+
+variable "administrator_login_password" {
+  description = "Password for the PostgreSQL server"
+  type        = string
+}

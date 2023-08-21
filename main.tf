@@ -1,8 +1,19 @@
+
 module "rgroup-n01537188" {
   source              = "./modules/rgroup-n01537188"
   resource_group_name = "n01537188-rg"
   location            = var.location
-  common_tags         = var.common_tags
+
+  common_tags = var.common_tags
+}
+
+module "common-n01537188" {
+  source               = "./modules/common-n01537188"
+  storage_account_name = var.storage_account_name
+  resource_group_name  = module.rgroup-n01537188.resource_group_name
+  location             = var.location
+
+  common_tags = var.common_tags
 }
 
 module "network-n01537188" {
@@ -11,24 +22,20 @@ module "network-n01537188" {
   subnet_name          = "n01537188-subnet"
   resource_group_name  = module.rgroup-n01537188.resource_group_name
   location             = var.location
-  common_tags          = var.common_tags
-}
 
-module "common-n01537188" {
-  source              = "./modules/common-n01537188"
-  resource_group_name = module.rgroup-n01537188.resource_group_name
-  location            = var.location
-  common_tags         = var.common_tags
+  common_tags = var.common_tags
 }
 
 module "database-n01537188" {
-  source              = "./modules/database-n01537188"
-  humber_id           = var.personal.n_number
-  location            = var.location
-  resource_group_name = module.rgroup-n01537188.resource_group_name
-  sku_name            = "GP_Gen5_2"
-  postgresql_version  = "10"
-  common_tags         = var.common_tags
+  source                       = "./modules/database-n01537188"
+  humber_id                    = var.personal.n_number
+  location                     = var.location
+  resource_group_name          = module.rgroup-n01537188.resource_group_name
+  sku_name                     = "GP_Gen5_2"
+  postgresql_version           = "10"
+  administrator_login_password = var.common_password
+
+  common_tags = var.common_tags
 }
 
 module "vmlinux-n01537188" {
@@ -46,11 +53,11 @@ module "vmlinux-n01537188" {
     storage_account_uri = module.common-n01537188.storage_account-primary_blob_endpoint
 
     admin_ssh_key = {
-      admin_username = "n01537188-surajmandal"
-      public_key     = "/Users/surajmandal/Desktop/dev.nosync/cloud/keys/aws_devops/devops1.pub"
+      admin_username = "n01537188"
+      public_key     = "~/.ssh/id_rsa.pub"
     }
 
-    private_key = "/Users/surajmandal/Desktop/dev.nosync/cloud/keys/aws_devops/devops1"
+    private_key = "~/.ssh/id_rsa"
 
     os_disk = {
       storage_account_type = "Standard_LRS"
@@ -109,70 +116,6 @@ module "vmlinux-n01537188" {
   common_tags = var.common_tags
 }
 
-module "vmwindows-n01537188" {
-  source = "./modules/vmwindows-n01537188"
-
-  location            = var.location
-  resource_group_name = module.rgroup-n01537188.resource_group_name
-
-  instance_count = 1
-
-  vmwindows-info = {
-    name           = "n7188-win"
-    computer_name  = "n01537188"
-    size           = "Standard_B1s"
-    admin_username = "n01537188"
-    admin_password = "/Users/surajmandal/Desktop/dev.nosync/cloud/keys/aws_devops/devops1"
-
-    winrm_listener_protocol = "Http"
-
-    storage_account_uri = module.common-n01537188.storage_account-primary_blob_endpoint
-
-    os_disk = {
-      storage_account_type = "StandardSSD_LRS"
-      disk_size_gb         = "128"
-      caching              = "ReadWrite"
-    }
-
-    source_image_reference = {
-      publisher = "MicrosoftWindowsServer"
-      offer     = "WindowsServer"
-      sku       = "2016-Datacenter"
-      version   = "latest"
-    }
-  }
-
-  vmwindows-avs-info = {
-    platform_update_domain_count = 1
-    platform_fault_domain_count  = 1
-  }
-
-  vmwindows-nic = {
-    ip-configuration = {
-      subnet_id                     = module.network-n01537188.n01537188-subnet.id
-      private_ip_address_allocation = "Dynamic"
-    }
-  }
-
-  vmwindows-pip = {
-    allocation_method       = "Dynamic"
-    idle_timeout_in_minutes = 30
-  }
-
-  vmwindows-antimalware = {
-    publisher                  = "Microsoft.Azure.Security"
-    type                       = "IaaSAntimalware"
-    type_handler_version       = "1.3"
-    auto_upgrade_minor_version = "true"
-
-    settings = <<SETTINGS
-        {}
-    SETTINGS
-  }
-
-  common_tags = var.common_tags
-}
-
 module "datadisk-n01537188" {
   source = "./modules/datadisk-n01537188"
 
@@ -189,20 +132,6 @@ module "datadisk-n01537188" {
 
   vmlinux-datadisk-attachment-info = {
     virtual_machine_ids = module.vmlinux-n01537188.n01537188-vmlinux.ids
-    lun                 = "0"
-    caching             = "ReadWrite"
-  }
-
-  vmwindows-datadisk-info = {
-    n01537188-vmwindows-names = module.vmwindows-n01537188.n01537188-vmwindows.hostnames
-    total-vms                 = 1
-    storage_account_type      = "Standard_LRS"
-    create_option             = "Empty"
-    disk_size_gb              = 10
-  }
-
-  vmwindows-datadisk-attachment-info = {
-    virtual_machine_ids = module.vmwindows-n01537188.n01537188-vmwindows.ids
     lun                 = "0"
     caching             = "ReadWrite"
   }

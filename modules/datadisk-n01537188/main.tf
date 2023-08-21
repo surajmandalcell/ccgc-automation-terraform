@@ -22,28 +22,3 @@ resource "azurerm_virtual_machine_data_disk_attachment" "n01537188-vmlinux-datad
 
   depends_on = [azurerm_managed_disk.n01537188-vmlinux-datadisk]
 }
-
-# Windows
-resource "azurerm_managed_disk" "n01537188-vmwindows-datadisk" {
-  resource_group_name = var.resource_group_name
-  location            = var.location
-
-  count = length(var.vmwindows-datadisk-info.n01537188-vmwindows-names)
-  name = "${
-    var.vmwindows-datadisk-info.n01537188-vmwindows-names[count.index]
-  }-datadisk-${format("%d", count.index + 1)}"
-  storage_account_type = var.vmwindows-datadisk-info.storage_account_type
-  create_option        = var.vmwindows-datadisk-info.create_option
-  disk_size_gb         = var.vmwindows-datadisk-info.disk_size_gb
-  tags                 = var.common_tags
-}
-
-resource "azurerm_virtual_machine_data_disk_attachment" "n01537188-vmwindows-datadisk-attachment" {
-  count              = length(var.vmwindows-datadisk-info.n01537188-vmwindows-names)
-  managed_disk_id    = azurerm_managed_disk.n01537188-vmwindows-datadisk[count.index].id
-  virtual_machine_id = var.vmwindows-datadisk-attachment-info.virtual_machine_ids[count.index]
-  lun                = var.vmwindows-datadisk-attachment-info.lun
-  caching            = var.vmwindows-datadisk-attachment-info.caching
-
-  depends_on = [azurerm_managed_disk.n01537188-vmwindows-datadisk]
-}

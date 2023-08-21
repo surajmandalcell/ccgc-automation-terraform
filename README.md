@@ -20,10 +20,6 @@ The `common-RandomID` module provisions 1 log analytics workspace, 1 recovery se
 
 The `vmlinux-RandomID` module provisions 3 CentOS 8.2 Linux VMs with public IP addresses across 3 availability zones. Each VM uses the storage account blob container created above for VM boot diagnostics. The VMs have unique DNS labels assigned and have Network Watcher and Azure Monitor extensions installed. The hostnames, domain names, private IP addresses, and public IP addresses of the VMs are returned to the root module.
 
-### Child Module: Windows Virtual Machines
-
-The `vmwindows-RandomID` module provisions 1 Windows Server 2016 VM with a public IP address in an availability set. The VM has the Antimalware extension installed and uses the storage account blob container created above for VM boot diagnostics. The VM has a unique DNS label assigned. The hostname, domain name, private IP address, and public IP address of the VM are returned to the root module.
-
 ### Child Module: Data Disks
 
 The `datadisk-RandomID` module provisions 4 x 10GB disks and attaches them to the 4 VMs.
@@ -49,7 +45,7 @@ TODO:
 - [x] network-n01537188
 - [x] rgroup-n01537188
 - [x] vmlinux-n01537188
-- [x] vmwindows-n01537188
+- [ ] ansible
 
 # Common Commands
 
